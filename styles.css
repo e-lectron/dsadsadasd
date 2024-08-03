@@ -1,0 +1,352 @@
+/* Подключение шрифта */
+@font-face {
+    font-family: 'VAGWorldBold';
+    src: url('vag_world_bold.ttf') format('truetype');
+}
+
+/* Применение шрифта к тексту в нижней панели */
+.bottom-bar-item p {
+    font-family: 'VAGWorldBold', sans-serif;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body, html {
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    font-family: Arial, sans-serif;
+    background-image: url('background.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    z-index: -100;
+}
+
+.screen {
+    display: none;
+    width: 100%;
+    height: calc(100% - 80px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    justify-content: center;
+    align-items: center;
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    padding-bottom: 80px;
+}
+
+/* Обновляем стиль для экрана 1 */
+#screen1 {
+    display: flex; /* Отображение первого экрана по умолчанию */
+    position: relative; /* Установка относительного позиционирования для дочерних элементов */
+}
+
+#screen1 .frame {
+    position: absolute; /* Абсолютное позиционирование внутри экрана */
+    bottom: -600px; /* Расположение на 53px выше от нижнего края экрана (80px для нижней панели + 53px отступ) */
+    left: 20px; /* Отступ от левого края экрана */
+    right: 20px; /* Отступ от правого края экрана */
+    height: 60px; /* Высота рамки */
+    border: 5px solid white; /* Белая рамка */
+    border-radius: 30px; /* Сильно скругленные углы */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Тень для создания эффекта глубины */
+    z-index: 1; /* Установка слоя для рамки */
+}
+
+/* Новый контейнер для фотографии */
+.settings-png {
+    position: absolute;
+    top: 65px; /* Отступ от верхнего края */
+    right: 40px; /* Отступ от правого края */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+}
+
+.png {
+    width: 30px; /* Ширина фотографии */
+    height: 30px; /* Высота фотографии */
+    border-radius: 50%; /* Округление фотографии */
+    object-fit: cover;
+}
+
+.user-info {
+    position: absolute;
+    top: 50px;
+    left: 20px;
+    display: flex;
+    align-items: center;
+    z-index: 100;
+}
+
+.user-photo {
+    width: 60px;
+    height: 60px;
+    border-radius: 30px;
+    object-fit: cover;
+    margin-right: 10px;
+}
+
+.nickname {
+    font-size: 18px;
+    color: white;
+    font-weight: bold;
+}
+
+.coin-container {
+    position: absolute;
+    top: 270px; /* Расположение 200px выше текста BALANCE */
+    display: flex;
+    justify-content: center;
+    width: 100%;
+    z-index: 2; /* Чтобы изображение находилось поверх других элементов */
+}
+
+.coin {
+    width: 250px; /* Ширина изображения монетки */
+    height: 250px; /* Высота изображения монетки */
+    cursor: pointer;
+    transition: transform 0.3s; /* Плавное изменение трансформации */
+}
+
+.coin:active {
+    transform: scale(1.2); /* Увеличение изображения при нажатии */
+}
+
+/* Баланс */
+.balance-container {
+    position: absolute;
+    top: 600px; /* Расположение 200px выше контейнера .frame */
+    left: 20px; /* Отступ от левого края экрана */
+    right: 20px; /* Отступ от правого края экрана */
+    display: flex;
+    flex-direction: column; /* Вертикальное выравнивание элементов */
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    z-index: 2; /* Чтобы текст находился поверх других элементов */
+}
+
+.balance-text {
+    font-size: 12px; /* Размер шрифта для BALANCE */
+    color: black; /* Белый цвет текста */
+    font-weight: bold;
+    font-family: 'VAGWorldBold', sans-serif;
+}
+
+.points-text {
+    font-size: 48px; /* Размер шрифта для 650 points */
+    color: white; /* Белый цвет текста */
+    font-weight: bold;
+    margin-top: -20px; /* Расстояние между BALANCE и 650 points */
+    font-family: 'VAGWorldBold', sans-serif;
+}
+
+/* Таймер */
+.timer-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 30px;
+    box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.5);
+    background: rgba(0, 0, 0, 0.3); /* Полупрозрачный фон для лучшей видимости изображения */
+}
+
+.timer-text {
+    position: relative;
+    font-size: 24px;
+    color: white;
+    z-index: 1; /* Выше изображения */
+    text-align: center;
+}
+
+.timer-image-wrapper {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    overflow: hidden;
+    border-radius: 30px; /* Так же как и у контейнера */
+}
+
+.timer-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+    transform: scaleX(0); /* Начальное состояние: изображение полностью скрыто */
+    transform-origin: left; /* Масштабирование начинается с левого края */
+    transition: transform 1s linear; /* Плавное изменение масштабирования */
+}
+
+/* Прямоугольник с текстом "CLAIM" */
+.claim-container {
+    position: absolute;
+    bottom: -90px; /* Позиция ниже таймера на 10 пикселей */
+    left: 120px;
+    right: 120px;
+    height: 30px; /* Высота прямоугольника */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: gray;
+    border-radius: 90px; /* Скошенные края */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    visibility: hidden; /* Изначально скрыт */
+    opacity: 0;
+    transition: visibility 0s, opacity 0.3s linear; /* Плавное появление */
+}
+
+.claim-text {
+    font-size: 12px;
+    color: black;
+    font-weight: bold;
+}
+
+.bottom-bar {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    background-color: rgba(0, 0, 0, 0.8);
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    z-index: 10;
+}
+
+.bottom-bar-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    cursor: pointer;
+    transition: transform 0.3s;
+}
+
+.bottom-bar-item img {
+    width: 30px;
+    height: 30px;
+    margin-bottom: 1px;
+    transition: filter 0.3s;
+}
+
+.bottom-bar-item p {
+    margin: 0;
+}
+
+.bottom-bar-item:hover {
+    transform: scale(1.1);
+}
+
+.active img {
+    filter: invert(1);
+}
+
+#screen1 {
+    display: flex;
+}
+
+/* Адаптивные стили для мобильных устройств */
+@media (max-width: 768px) {
+    #screen1 .frame {
+        bottom: -650px; /* Расположение рамки на 53px выше от нижнего края экрана на маленьких экранах */
+        height: 50px; /* Уменьшение высоты рамки для мобильных устройств */
+        border-width: 3px; /* Уменьшение толщины рамки */
+        border-radius: 25px; /* Уменьшение радиуса скругления углов */
+        left: 10px; /* Уменьшение отступа от левого края экрана */
+        right: 10px; /* Уменьшение отступа от правого края экрана */
+    }
+
+    .settings-png {
+        top: 15px; /* Уменьшение отступа сверху для мобильных устройств */
+        right: 10px; /* Уменьшение отступа справа для мобильных устройств */
+    }
+
+    .png {
+        width: 24px; /* Уменьшение размера иконки для мобильных устройств */
+        height: 24px;
+    }
+
+    .user-info {
+        top: 10px; /* Уменьшение отступа сверху для мобильных устройств */
+        left: 10px; /* Уменьшение отступа слева для мобильных устройств */
+    }
+
+    .user-photo {
+        width: 50px; /* Уменьшение размера фото пользователя для мобильных устройств */
+        height: 50px;
+    }
+
+    .nickname {
+        font-size: 16px; /* Уменьшение размера шрифта для мобильных устройств */
+    }
+
+    .coin-container {
+        top: 200px; /* Уменьшение расстояния до монетки для мобильных устройств */
+    }
+
+    .coin {
+        width: 200px; /* Уменьшение размера монетки для мобильных устройств */
+        height: 200px;
+    }
+
+    .balance-container {
+        top: 500px; /* Уменьшение расстояния до текста BALANCE для мобильных устройств */
+    }
+
+    .balance-text {
+        font-size: 10px; /* Уменьшение размера шрифта для мобильных устройств */
+    }
+
+    .points-text {
+        font-size: 36px; /* Уменьшение размера шрифта для мобильных устройств */
+        margin-top: -10px; /* Уменьшение расстояния между BALANCE и 650 POINTS */
+    }
+
+    .timer-text {
+        font-size: 18px; /* Уменьшение размера шрифта таймера для мобильных устройств */
+    }
+
+    .claim-container {
+        bottom: -70px; /* Уменьшение расстояния до нижнего края экрана для мобильных устройств */
+        left: 80px; /* Уменьшение отступа слева для мобильных устройств */
+        right: 80px; /* Уменьшение отступа справа для мобильных устройств */
+    }
+
+    .claim-text {
+        font-size: 10px; /* Уменьшение размера шрифта текста CLAIM для мобильных устройств */
+    }
+
+    .bottom-bar {
+        height: 60px; /* Уменьшение высоты нижней панели для мобильных устройств */
+    }
+
+    .bottom-bar-item img {
+        width: 24px; /* Уменьшение размера иконок в нижней панели для мобильных устройств */
+        height: 24px;
+    }
+
+    .bottom-bar-item p {
+        font-size: 12px; /* Уменьшение размера шрифта в нижней панели для мобильных устройств */
+    }
+}

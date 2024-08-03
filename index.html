@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Website</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="screens">
+        <div class="screen" id="screen1">
+            <div class="user-info">
+                <img src="avatar.png" alt="User Photo" class="user-photo">
+                <div class="nickname">nickname</div>
+            </div>
+            <div class="settings-png">
+                <img src="settings.png" alt="settings" class="png">
+            </div>
+            <!-- Контейнер для изображения монетки -->
+            <div class="coin-container">
+                <img src="coin.png" alt="Coin" class="coin">
+            </div>
+            <div class="balance-container">
+                <div class="balance-text">TOTAL BALANCE:</div>
+                <div class="points-text">650 POINTS</div>
+            </div>
+            <div class="frame">
+                <div class="timer-container">
+                    <div class="timer-bar"></div>
+                    <div class="timer-text">00:00:30</div>
+                    <img class="timer-image" src="timer-bar.png" alt="Timer Image">
+                    <div class="claim-container">
+                        <div class="claim-text">CLAIM</div>
+                    </div>
+                </div>
+            </div>
+            <!-- Остальное содержимое экрана 1 -->
+        </div>
+        <div class="screen" id="screen2">
+            <h1>Screen 2</h1>
+        </div>
+        <div class="screen" id="screen3">
+            <h1>Screen 3</h1>
+        </div>
+        <div class="screen" id="screen4">
+            <h1>Screen 4</h1>
+        </div>
+    </div>
+    <div class="bottom-bar">
+        <div class="bottom-bar-item" data-target="screen1">
+            <img src="home.png" alt="Home">
+            <p>Home</p>
+        </div>
+        <div class="bottom-bar-item" data-target="screen2">
+            <img src="boost.png" alt="Boost">
+            <p>Boost</p>
+        </div>
+        <div class="bottom-bar-item" data-target="screen3">
+            <img src="tasks.png" alt="Tasks">
+            <p>Tasks</p>
+        </div>
+        <div class="bottom-bar-item" data-target="screen4">
+            <img src="friends.png" alt="Friends">
+            <p>Friends</p>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
