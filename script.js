@@ -87,3 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 });
+window.onload = function() {
+    // Проверьте, что Telegram Web Apps API доступен
+    if (window.Telegram) {
+        Telegram.WebApp.init();
+        
+        // Получите данные о пользователе
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        
+        // Проверьте, что имя пользователя доступно
+        if (user && user.first_name) {
+            // Найдите элемент и вставьте имя пользователя
+            const nicknameElement = document.querySelector('.nickname');
+            if (nicknameElement) {
+                nicknameElement.textContent = user.first_name;
+            }
+        }
+    }
+};
