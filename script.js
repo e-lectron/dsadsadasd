@@ -94,9 +94,11 @@ document.addEventListener('DOMContentLoaded', () => {
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         const user = Telegram.WebApp.initDataUnsafe.user;
         if (user) {
+            console.log('Username:', user.username || user.first_name);
+            console.log('Photo URL:', user.photo_url);
             document.getElementById('nickname').textContent = user.username || user.first_name;
             
-            // Пример URL проверки
+            // Проверьте доступность URL
             if (user.photo_url) {
                 fetch(user.photo_url)
                     .then(response => {
@@ -107,11 +109,12 @@ document.addEventListener('DOMContentLoaded', () => {
                         }
                     })
                     .catch(error => console.error('Error fetching photo URL:', error));
+            } else {
+                console.error('Photo URL is not provided.');
             }
         }
     } else {
         console.error('Telegram Web App is not available.');
     }
 });
-
 
