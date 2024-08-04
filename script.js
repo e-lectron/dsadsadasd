@@ -89,19 +89,28 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 });
-
 document.addEventListener('DOMContentLoaded', () => {
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
         const user = Telegram.WebApp.initDataUnsafe.user;
         if (user) {
             document.getElementById('nickname').textContent = user.username || user.first_name;
+            const userPhotoElement = document.getElementById('user-photo');
             if (user.photo_url) {
-                // Добавление уникального параметра для предотвращения кэширования
-                const uniquePhotoUrl = `${user.photo_url}?timestamp=${new Date().getTime()}`;
-                document.getElementById('user-photo').src = uniquePhotoUrl;
+                // Проверяем, доступен ли URL фотографии
+                fetch(user.photo_url)
+                    .then(response => {
+                        if (response.ok) {
+                            // Добавляем параметр к URL, чтобы предотвратить кэширование
+                            userPhotoElement.src = `${user.photo_url}?timestamp=${new Date().getTime()}`;
+                        } else {
+                            console.error('Photo URL is not accessible.');
+                        }
+                    })
+                    .catch(error => console.error('Error fetching photo URL:', error));
             }
         }
     } else {
         console.error('Telegram Web App is not available.');
     }
 });
+
