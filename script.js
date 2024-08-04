@@ -95,7 +95,11 @@ document.addEventListener('DOMContentLoaded', () => {
         const user = Telegram.WebApp.initDataUnsafe.user;
         if (user) {
             document.getElementById('nickname').textContent = user.username || user.first_name;
-            document.getElementById('user-photo').src = user.photo_url;
+            if (user.photo_url) {
+                // Добавление уникального параметра для предотвращения кэширования
+                const uniquePhotoUrl = `${user.photo_url}?timestamp=${new Date().getTime()}`;
+                document.getElementById('user-photo').src = uniquePhotoUrl;
+            }
         }
     } else {
         console.error('Telegram Web App is not available.');
