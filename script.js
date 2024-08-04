@@ -87,21 +87,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 });
-window.onload = function() {
-    // Проверьте, что Telegram Web Apps API доступен
-    if (window.Telegram) {
-        Telegram.WebApp.init();
-        
-        // Получите данные о пользователе
-        const user = Telegram.WebApp.initDataUnsafe.user;
-        
-        // Проверьте, что имя пользователя доступно
-        if (user && user.first_name) {
-            // Найдите элемент и вставьте имя пользователя
-            const nicknameElement = document.querySelector('.nickname');
-            if (nicknameElement) {
-                nicknameElement.textContent = user.first_name;
-            }
+document.addEventListener('DOMContentLoaded', function () {
+    // Проверяем, доступен ли объект Telegram Web Apps
+    if (window.Telegram.WebApp) {
+        const webApp = window.Telegram.WebApp;
+        const user = webApp.initDataUnsafe.user;
+
+        // Если пользовательская информация доступна, устанавливаем ее
+        if (user) {
+            document.getElementById('nickname').textContent = user.username;
+            document.getElementById('user-photo').src = user.photo_url;
         }
+
+        // Инициализация веб-приложения Telegram
+        webApp.ready();
+    } else {
+        console.error("Telegram Web Apps не доступен.");
     }
-};
+});
