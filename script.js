@@ -1,7 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     const timerText = document.querySelector('.timer-text');
     const timerImage = document.querySelector('.timer-image');
-    const totalTime = 3; // Время таймера в секундах
+    const totalTime = 30; // Время таймера в секундах
     let remainingTime = totalTime;
     let timerInterval;
 
@@ -36,6 +36,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     startTimer(); // Запуск таймера при загрузке страницы
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     const bottomBarItems = document.querySelectorAll('.bottom-bar-item');
     const screens = document.querySelectorAll('.screen');
@@ -60,6 +61,7 @@ document.addEventListener('DOMContentLoaded', () => {
     bottomBarItems[0].classList.add('active');
     screens[0].style.display = 'flex';
 });
+
 document.addEventListener('DOMContentLoaded', () => {
     const bottomBarItems = document.querySelectorAll('.bottom-bar-item');
     const screens = document.querySelectorAll('.screen');
@@ -87,27 +89,14 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 });
-document.addEventListener('DOMContentLoaded', function() {
-    // Ensure the Telegram Web App is initialized
+
+document.addEventListener('DOMContentLoaded', () => {
     if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
-        const userId = Telegram.WebApp.initDataUnsafe.user.id;
-        fetch('/get_user_info', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({ user_id: userId })
-        })
-        .then(response => response.json())
-        .then(data => {
-            if (data.username) {
-                document.getElementById('nickname').textContent = data.username;
-            }
-            if (data.photo_url) {
-                document.getElementById('user-photo').src = data.photo_url;
-            }
-        })
-        .catch(error => console.error('Error:', error));
+        const user = Telegram.WebApp.initDataUnsafe.user;
+        if (user) {
+            document.getElementById('nickname').textContent = user.username || user.first_name;
+            document.getElementById('user-photo').src = user.photo_url;
+        }
     } else {
         console.error('Telegram Web App is not available.');
     }

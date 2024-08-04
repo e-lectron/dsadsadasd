@@ -137,7 +137,7 @@ body, html {
 
 .balance-text {
     font-size: 12px; /* Размер шрифта для BALANCE */
-    color: black; /* Белый цвет текста */
+    color: black; /* Черный цвет текста */
     font-weight: bold;
     font-family: 'VAGWorldBold', sans-serif;
 }
@@ -252,14 +252,11 @@ body, html {
 
 .bottom-bar-item p {
     margin: 0;
+    font-family: 'VAGWorldBold', sans-serif;
 }
 
 .bottom-bar-item:hover {
     transform: scale(1.1);
-}
-
-.active img {
-    filter: invert(1);
 }
 
 #screen1 {

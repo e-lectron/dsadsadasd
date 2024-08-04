@@ -10,8 +10,8 @@
     <div class="screens">
         <div class="screen" id="screen1">
             <div class="user-info">
-                <img src="avatar.png" alt="User Photo" class="user-photo">
-                <div class="nickname">nickname</div>
+                <img src="default_avatar.png" alt="User Photo" class="user-photo" id="user-photo">
+                <div class="nickname" id="nickname">nickname</div>
             </div>
             <div class="settings-png">
                 <img src="settings.png" alt="settings" class="png">
@@ -47,19 +47,19 @@
         </div>
     </div>
     <div class="bottom-bar">
-        <div class="bottom-bar-item" data-target="screen1">
+        <div class="bottom-bar-item" data-target="screen1" data-active-icon="home-active.png" data-inactive-icon="home.png">
             <img src="home.png" alt="Home">
             <p>Home</p>
         </div>
-        <div class="bottom-bar-item" data-target="screen2">
+        <div class="bottom-bar-item" data-target="screen2" data-active-icon="boost-active.png" data-inactive-icon="boost.png">
             <img src="boost.png" alt="Boost">
             <p>Boost</p>
         </div>
-        <div class="bottom-bar-item" data-target="screen3">
+        <div class="bottom-bar-item" data-target="screen3" data-active-icon="tasks-active.png" data-inactive-icon="tasks.png">
             <img src="tasks.png" alt="Tasks">
             <p>Tasks</p>
         </div>
-        <div class="bottom-bar-item" data-target="screen4">
+        <div class="bottom-bar-item" data-target="screen4" data-active-icon="friends-active.png" data-inactive-icon="friends.png">
             <img src="friends.png" alt="Friends">
             <p>Friends</p>
         </div>
