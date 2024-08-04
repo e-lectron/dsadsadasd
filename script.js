@@ -87,31 +87,23 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     });
 });
-document.addEventListener('DOMContentLoaded', function () {
-    // Проверяем, доступен ли объект window.Telegram
-    if (typeof window.Telegram === 'undefined') {
-        console.error("Telegram Web Apps не доступен. Убедитесь, что вы запускаете скрипт внутри Telegram Web Apps.");
-        return;
-    }
-
-    // Проверяем, доступен ли объект WebApp
-    if (typeof window.Telegram.WebApp === 'undefined') {
-        console.error("Telegram WebApps не найден. Проверьте, правильно ли инициализирован объект Telegram.");
-        return;
-    }
-
-    const webApp = window.Telegram.WebApp;
-    const user = webApp.initDataUnsafe.user;
-
-    // Если пользовательская информация доступна, устанавливаем ее
-    if (user) {
-        document.getElementById('nickname').textContent = user.username || 'No username';
-        document.getElementById('user-photo').src = user.photo_url || 'default-photo.png';
-    } else {
-        console.error("Пользовательская информация недоступна. Возможно, пользователь не авторизован.");
-    }
-
-    // Инициализация веб-приложения Telegram
-    webApp.ready();
-});
-
+document.addEventListener('DOMContentLoaded', function() {
+            const userId = window.Telegram.WebApp.initDataUnsafe.user.id;
+            fetch('/get_user_info', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ user_id: userId })
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.username) {
+                    document.getElementById('nickname').textContent = data.username;
+                }
+                if (data.photo_url) {
+                    document.getElementById('user-photo').src = data.photo_url;
+                }
+            })
+            .catch(error => console.error('Error:', error));
+        });
