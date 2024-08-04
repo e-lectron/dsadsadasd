@@ -88,22 +88,27 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 document.addEventListener('DOMContentLoaded', function() {
-            const userId = window.Telegram.WebApp.initDataUnsafe.user.id;
-            fetch('/get_user_info', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({ user_id: userId })
-            })
-            .then(response => response.json())
-            .then(data => {
-                if (data.username) {
-                    document.getElementById('nickname').textContent = data.username;
-                }
-                if (data.photo_url) {
-                    document.getElementById('user-photo').src = data.photo_url;
-                }
-            })
-            .catch(error => console.error('Error:', error));
-        });
+    // Ensure the Telegram Web App is initialized
+    if (typeof Telegram !== 'undefined' && Telegram.WebApp) {
+        const userId = Telegram.WebApp.initDataUnsafe.user.id;
+        fetch('/get_user_info', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ user_id: userId })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.username) {
+                document.getElementById('nickname').textContent = data.username;
+            }
+            if (data.photo_url) {
+                document.getElementById('user-photo').src = data.photo_url;
+            }
+        })
+        .catch(error => console.error('Error:', error));
+    } else {
+        console.error('Telegram Web App is not available.');
+    }
+});
